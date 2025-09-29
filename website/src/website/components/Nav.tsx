@@ -7,9 +7,9 @@ export class PageNav extends React.Component {
 		return (
 			<Navbar bg="dark" variant="dark" expand="lg">
 				<Container fluid>
-					<Navbar.Brand href="./">
+					<Navbar.Brand href="./switch.html">
 						<span className="code-oss-icon d-inline-block align-top" />
-						Monaco Editor
+						Switch Up
 					</Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav" role="">
@@ -33,7 +33,7 @@ export class PageNav extends React.Component {
 								active={switchRoute.isActive}
 								href={switchRoute.href}
 							>
-								SWITCH
+								Switch Up
 							</Nav.Link>
 							<Nav.Link active={docs.isActive} href={docs.href}>
 								Documentation
@@ -47,7 +47,7 @@ export class PageNav extends React.Component {
 										<span className="nav-icon bi-download" />
 										<span className="hidden-text">
 											{" "}
-											Download{" "}
+											Get Started{" "}
 										</span>
 									</>
 								}
@@ -55,22 +55,14 @@ export class PageNav extends React.Component {
 								align="end"
 							>
 								{/*<NavDropdown.Item href="#action/3.1">
-									Download 0.33.0
+									Get Started 0.33.0
 						</NavDropdown.Item>*/}
-								<NavDropdown.Item
-									href="https://www.npmjs.com/package/monaco-editor"
-									target="_blank"
-								>
-									Get From NPM
-								</NavDropdown.Item>
+								<NavDropdown.Item href="./switch.html">Open Switch Up</NavDropdown.Item>
 							</NavDropdown>
 
-							<Nav.Link
-								href="https://github.com/microsoft/monaco-editor"
-								target="_blank"
-							>
+							<Nav.Link href="./switch.html">
 								<span className="nav-icon bi-github" />
-								<span className="hidden-text"> GitHub </span>
+								<span className="hidden-text"> Launch </span>
 							</Nav.Link>
 						</Nav>
 					</Navbar.Collapse>

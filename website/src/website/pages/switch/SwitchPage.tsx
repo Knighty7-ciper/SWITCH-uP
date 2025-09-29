@@ -1,5 +1,8 @@
 import * as React from "react";
 import { ControlledMonacoEditor } from "../../components/monaco/MonacoEditor";
+import { SnippetVault } from "./SnippetVault";
+import { RegexPlayground } from "./RegexPlayground";
+import { getLoadedMonaco } from "../../../monaco-loader";
 import "../../switch.scss";
 import {
 	createRepository,
@@ -40,6 +43,13 @@ export function SwitchPage() {
 	const [activeRepo, setActiveRepo] = React.useState<
 		RepoRecord | undefined
 	>();
+	const [showSnippets, setShowSnippets] = React.useState(false);
+	const [showRegex, setShowRegex] = React.useState(false);
+	const [asciiOpen, setAsciiOpen] = React.useState(false);
+	const [asciiText, setAsciiText] = React.useState("");
+	const [saving, setSaving] = React.useState(false);
+	const [isOnline, setIsOnline] = React.useState<boolean>(typeof navigator !== "undefined" ? navigator.onLine : true);
+	const editorRef = React.useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
 	const [tree, setTree] = React.useState<
 		{ path: string; isDir: boolean; children?: any[] }[]
 	>([]);
@@ -68,6 +78,23 @@ export function SwitchPage() {
 
 	React.useEffect(() => {
 		refreshRepos();
+		window.addEventListener("online", () => setIsOnline(true));
+		window.addEventListener("offline", () => setIsOnline(false));
+		(async () => {
+			try {
+				const res = await fetch("/config.json");
+				if (res.ok) {
+					const config = await res.json();
+					if (editorRef.current) {
+						editorRef.current.updateOptions(config);
+					}
+				}
+			} catch {}
+		})();
+		return () => {
+			window.removeEventListener("online", () => setIsOnline(true));
+			window.removeEventListener("offline", () => setIsOnline(false));
+		};
 	}, []);
 
 	React.useEffect(() => {
@@ -637,15 +664,61 @@ export function SwitchPage() {
 							onDidValueChange={setEditorValue}
 							language={openFile?.language || "plaintext"}
 							theme="vs-dark"
+							onEditorLoaded={(ed) => {
+								editorRef.current = ed;
+								const mon = getLoadedMonaco();
+								ed.onKeyDown(async (e) => {
+									if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.keyCode === mon.KeyCode.KeyA) {
+										e.preventDefault();
+										try {
+											const figlet = await import("figlet");
+											const ascii = figlet.textSync(ed.getValue());
+											setAsciiText(ascii);
+											setAsciiOpen(true);
+										} catch (err) {
+											alert("ASCII mode failed: " + ((err as any)?.message || String(err)));
+										}
+									}
+								});
+							}}
 						/>
 					</div>
+				<div className="switch-floating-bar">
+					<button className="switch-secondary-btn" onClick={onSave} disabled={!openFile}>💾 Save</button>
+					<button className="switch-secondary-btn" onClick={()=>setShowSnippets(true)}>📦 Snippets</button>
+					<button className="switch-secondary-btn" onClick={()=>setShowRegex(true)}>🔍 Regex</button>
+				</div>
+				{saving && <div className="switch-save-progress" />}
+				<SnippetVault
+					open={showSnippets}
+					onClose={()=>setShowSnippets(false)}
+					onInsert={(code)=>{ setEditorValue((v)=> v + (v.endsWith("\n") ? "" : "\n") + code); setShowSnippets(false); }}
+				/>
+				<RegexPlayground
+					open={showRegex}
+					onClose={()=>setShowRegex(false)}
+					language={openFile?.language || "plaintext"}
+					original={editorValue}
+				/>
+				{asciiOpen && (
+					<div className="switch-modal-backdrop" onClick={()=>setAsciiOpen(false)}>
+						<div className="switch-modal" onClick={(e)=>e.stopPropagation()}>
+							<div className="switch-modal-header">
+								<div>ASCII Art</div>
+								<button className="switch-secondary-btn" onClick={()=>setAsciiOpen(false)}>Close</button>
+							</div>
+							<div className="switch-modal-body">
+								<pre style={{whiteSpace: "pre-wrap"}}>{asciiText}</pre>
+							</div>
+						</div>
+					</div>
+				)}
 				</section>
 			</div>
 			<footer className="switch-statusbar" aria-label="Status Bar">
-				<div className="switch-status-item">SWITCH</div>
-				<div className="switch-status-item">
-					{openFile?.language || "Plain Text"}
-				</div>
+				<div className="switch-status-item">Switch Up</div>
+				<div className="switch-status-item">{isOnline ? "Offline-First" : "Offline"}</div>
+				<div className="switch-status-item">{openFile?.language || "Plain Text"}</div>
 				<div className="switch-status-item">UTF-8</div>
 				<div className="switch-status-item">LF</div>
 			</footer>

@@ -48,14 +48,11 @@ export class Home extends React.Component {
 					</div>
 
 					<div className="px-5 mb-0">
-						<h3>Download v{monacoEditorVersion}</h3>
+						<h3>Get Started</h3>
 						<div className="row">
 							<div className="span12">
 								<br />
-								<p>
-									The latest released version is{" "}
-									<strong>{monacoEditorVersion}</strong>.
-								</p>
+								<p>Switch Up runs 100% locally. Click “Open Switch Up” to start.</p>
 								<p>
 									Download with this direct{" "}
 									<a
