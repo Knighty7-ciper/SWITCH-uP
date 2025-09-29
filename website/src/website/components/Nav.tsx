@@ -47,7 +47,7 @@ export class PageNav extends React.Component {
 										<span className="nav-icon bi-download" />
 										<span className="hidden-text">
 											{" "}
-											Download{" "}
+											Get Started{" "}
 										</span>
 									</>
 								}
@@ -55,7 +55,7 @@ export class PageNav extends React.Component {
 								align="end"
 							>
 								{/*<NavDropdown.Item href="#action/3.1">
-									Download 0.33.0
+									Get Started 0.33.0
 						</NavDropdown.Item>*/}
 								<NavDropdown.Item href="./switch.html">Open Switch Up</NavDropdown.Item>
 							</NavDropdown>
