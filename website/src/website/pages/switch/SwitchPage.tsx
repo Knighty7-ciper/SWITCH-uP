@@ -43,6 +43,13 @@ export function SwitchPage() {
 	const [activeRepo, setActiveRepo] = React.useState<
 		RepoRecord | undefined
 	>();
+	const [showSnippets, setShowSnippets] = React.useState(false);
+	const [showRegex, setShowRegex] = React.useState(false);
+	const [asciiOpen, setAsciiOpen] = React.useState(false);
+	const [asciiText, setAsciiText] = React.useState("");
+	const [saving, setSaving] = React.useState(false);
+	const [isOnline, setIsOnline] = React.useState<boolean>(typeof navigator !== "undefined" ? navigator.onLine : true);
+	const editorRef = React.useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
 	const [tree, setTree] = React.useState<
 		{ path: string; isDir: boolean; children?: any[] }[]
 	>([]);
