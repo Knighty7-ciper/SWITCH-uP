@@ -78,6 +78,23 @@ export function SwitchPage() {
 
 	React.useEffect(() => {
 		refreshRepos();
+		window.addEventListener("online", () => setIsOnline(true));
+		window.addEventListener("offline", () => setIsOnline(false));
+		(async () => {
+			try {
+				const res = await fetch("/config.json");
+				if (res.ok) {
+					const config = await res.json();
+					if (editorRef.current) {
+						editorRef.current.updateOptions(config);
+					}
+				}
+			} catch {}
+		})();
+		return () => {
+			window.removeEventListener("online", () => setIsOnline(true));
+			window.removeEventListener("offline", () => setIsOnline(false));
+		};
 	}, []);
 
 	React.useEffect(() => {
