@@ -683,6 +683,36 @@ export function SwitchPage() {
 							}}
 						/>
 					</div>
+				<div className="switch-floating-bar">
+					<button className="switch-secondary-btn" onClick={onSave} disabled={!openFile}>💾 Save</button>
+					<button className="switch-secondary-btn" onClick={()=>setShowSnippets(true)}>📦 Snippets</button>
+					<button className="switch-secondary-btn" onClick={()=>setShowRegex(true)}>🔍 Regex</button>
+				</div>
+				{saving && <div className="switch-save-progress" />}
+				<SnippetVault
+					open={showSnippets}
+					onClose={()=>setShowSnippets(false)}
+					onInsert={(code)=>{ setEditorValue((v)=> v + (v.endsWith("\n") ? "" : "\n") + code); setShowSnippets(false); }}
+				/>
+				<RegexPlayground
+					open={showRegex}
+					onClose={()=>setShowRegex(false)}
+					language={openFile?.language || "plaintext"}
+					original={editorValue}
+				/>
+				{asciiOpen && (
+					<div className="switch-modal-backdrop" onClick={()=>setAsciiOpen(false)}>
+						<div className="switch-modal" onClick={(e)=>e.stopPropagation()}>
+							<div className="switch-modal-header">
+								<div>ASCII Art</div>
+								<button className="switch-secondary-btn" onClick={()=>setAsciiOpen(false)}>Close</button>
+							</div>
+							<div className="switch-modal-body">
+								<pre style={{whiteSpace: "pre-wrap"}}>{asciiText}</pre>
+							</div>
+						</div>
+					</div>
+				)}
 				</section>
 			</div>
 			<footer className="switch-statusbar" aria-label="Status Bar">
