@@ -52,10 +52,7 @@ export class Home extends React.Component {
 						<div className="row">
 							<div className="span12">
 								<br />
-								<p>
-									The latest released version is{" "}
-									<strong>{monacoEditorVersion}</strong>.
-								</p>
+								<p>Switch Up runs 100% locally. Click “Open Switch Up” to start.</p>
 								<p>
 									Download with this direct{" "}
 									<a
