@@ -7,9 +7,9 @@ export class PageNav extends React.Component {
 		return (
 			<Navbar bg="dark" variant="dark" expand="lg">
 				<Container fluid>
-					<Navbar.Brand href="./">
+					<Navbar.Brand href="./switch.html">
 						<span className="code-oss-icon d-inline-block align-top" />
-						Monaco Editor
+						Switch Up
 					</Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav" role="">
