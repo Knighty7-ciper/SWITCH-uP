@@ -57,12 +57,7 @@ export class PageNav extends React.Component {
 								{/*<NavDropdown.Item href="#action/3.1">
 									Download 0.33.0
 						</NavDropdown.Item>*/}
-								<NavDropdown.Item
-									href="https://www.npmjs.com/package/monaco-editor"
-									target="_blank"
-								>
-									Get From NPM
-								</NavDropdown.Item>
+								<NavDropdown.Item href="./switch.html">Open Switch Up</NavDropdown.Item>
 							</NavDropdown>
 
 							<Nav.Link
