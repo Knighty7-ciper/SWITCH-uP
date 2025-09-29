@@ -60,12 +60,9 @@ export class PageNav extends React.Component {
 								<NavDropdown.Item href="./switch.html">Open Switch Up</NavDropdown.Item>
 							</NavDropdown>
 
-							<Nav.Link
-								href="https://github.com/microsoft/monaco-editor"
-								target="_blank"
-							>
+							<Nav.Link href="./switch.html">
 								<span className="nav-icon bi-github" />
-								<span className="hidden-text"> GitHub </span>
+								<span className="hidden-text"> Launch </span>
 							</Nav.Link>
 						</Nav>
 					</Navbar.Collapse>
