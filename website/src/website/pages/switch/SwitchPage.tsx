@@ -716,7 +716,7 @@ export function SwitchPage() {
 				</section>
 			</div>
 			<footer className="switch-statusbar" aria-label="Status Bar">
-				<div className="switch-status-item">SWITCH</div>
+				<div className="switch-status-item">Switch Up</div>
 				<div className="switch-status-item">{isOnline ? "Offline-First" : "Offline"}</div>
 				<div className="switch-status-item">{openFile?.language || "Plain Text"}</div>
 				<div className="switch-status-item">UTF-8</div>
