@@ -22,3 +22,32 @@
 .switch-shell > .switch-activity-bar { position: fixed; top: 0; bottom: 24px; left: 0; }
 .switch-shell > .switch-main { margin-left: 48px; }
 .switch-shell > .switch-statusbar { position: fixed; bottom: 0; left: 0; right: 0; }
+
+/* Modals */
+.switch-modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+.switch-modal { width: 640px; max-width: 90vw; background: #1e1e1e; color: #ddd; border: 1px solid #2d2d2d; border-radius: 6px; box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
+.switch-modal-large { width: 900px; }
+.switch-modal-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; border-bottom: 1px solid #2d2d2d; }
+.switch-modal-body { padding: 12px; }
+.switch-error { color: #f48771; font-size: 12px; margin-left: 8px; }
+
+/* Floating action bar */
+.switch-floating-bar { position: fixed; right: 20px; bottom: 40px; display: flex; gap: 8px; z-index: 900; }
+
+/* Save progress bar */
+.switch-save-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg,#0e639c,#3794ff,#0e639c); animation: switch-progress 1s linear infinite; }
+@keyframes switch-progress { 0% { background-position: 0 0 } 100% { background-position: 200% 0 } }
+
+/* Snippet vault */
+.switch-snippet-form { display: grid; gap: 6px; margin-bottom: 12px; }
+.switch-snippet-search { margin-bottom: 8px; }
+.switch-snippet-list { list-style: none; margin: 0; padding: 0; max-height: 40vh; overflow: auto; }
+.switch-snippet-item { display: flex; align-items: center; justify-content: space-between; padding: 8px; border: 1px solid #2d2d2d; border-radius: 4px; background: #252526; margin-bottom: 8px; }
+.switch-snippet-meta { display: flex; flex-direction: column; gap: 4px; }
+.switch-snippet-title { font-weight: 600; }
+.switch-snippet-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.switch-tag { font-size: 11px; padding: 2px 6px; background: #3c3c3c; border: 1px solid #2d2d2d; border-radius: 999px; color: #ccc; }
+
+/* Regex */
+.switch-regex-controls { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.switch-regex-flags { display: flex; gap: 8px; }
