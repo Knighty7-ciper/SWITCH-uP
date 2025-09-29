@@ -664,6 +664,23 @@ export function SwitchPage() {
 							onDidValueChange={setEditorValue}
 							language={openFile?.language || "plaintext"}
 							theme="vs-dark"
+							onEditorLoaded={(ed) => {
+								editorRef.current = ed;
+								const mon = getLoadedMonaco();
+								ed.onKeyDown(async (e) => {
+									if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.keyCode === mon.KeyCode.KeyA) {
+										e.preventDefault();
+										try {
+											const figlet = await import("figlet");
+											const ascii = figlet.textSync(ed.getValue());
+											setAsciiText(ascii);
+											setAsciiOpen(true);
+										} catch (err) {
+											alert("ASCII mode failed: " + ((err as any)?.message || String(err)));
+										}
+									}
+								});
+							}}
 						/>
 					</div>
 				</section>
