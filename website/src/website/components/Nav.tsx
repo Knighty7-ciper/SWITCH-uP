@@ -33,7 +33,7 @@ export class PageNav extends React.Component {
 								active={switchRoute.isActive}
 								href={switchRoute.href}
 							>
-								SWITCH
+								Switch Up
 							</Nav.Link>
 							<Nav.Link active={docs.isActive} href={docs.href}>
 								Documentation
