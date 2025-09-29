@@ -1,5 +1,8 @@
 import * as React from "react";
 import { ControlledMonacoEditor } from "../../components/monaco/MonacoEditor";
+import { SnippetVault } from "./SnippetVault";
+import { RegexPlayground } from "./RegexPlayground";
+import { getLoadedMonaco } from "../../../monaco-loader";
 import "../../switch.scss";
 import {
 	createRepository,
