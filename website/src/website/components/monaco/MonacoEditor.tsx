@@ -6,6 +6,7 @@ import { withLoadedMonaco } from "./MonacoLoader";
 export class ControlledMonacoEditor extends React.Component<{
 	value: string;
 	onDidValueChange?: (newValue: string) => void;
+	onEditorLoaded?: (editor: monaco.editor.IStandaloneCodeEditor) => void;
 
 	language?: string;
 	theme?: string;
@@ -56,6 +57,7 @@ export class ControlledMonacoEditor extends React.Component<{
 				readOnly={!this.props.onDidValueChange}
 				model={this.model}
 				theme={this.props.theme}
+				onEditorLoaded={this.props.onEditorLoaded}
 			/>
 		);
 	}
